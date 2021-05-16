@@ -17,12 +17,13 @@ variable "vpc_details" {
   }
 }
 
-
+# discovery open to all to allow p2p traffic and let the nodes connect to other nodes
+# RPC calls restricted to a whitelisted IPs
 variable "ingress_ips" {
   type = map(any)
   default = {
-    discovery_ips = []
-    rpc_ips = []
+    discovery_cidrs = ["0.0.0.0/0"]
+    rpc_cidrs = []
   }
 }
 

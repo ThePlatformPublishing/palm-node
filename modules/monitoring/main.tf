@@ -67,6 +67,7 @@ resource "aws_iam_instance_profile" "monitoring_profile" {
 }
 
 resource "aws_instance" "monitoring" {
+  count = var.create_monitoring_node ? 1 : 0
   ami = var.node_details["ami_id"]
   instance_type = var.node_details["instance_type"]
   iam_instance_profile = aws_iam_instance_profile.monitoring_profile.name

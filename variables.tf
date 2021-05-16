@@ -4,6 +4,12 @@ variable "env_type" {
   default = "dev"
 }
 
+variable "create_monitoring_node" {
+  description = "create a monitoring instance to monitor the health of the palm node"
+  type        = bool
+  default     = true
+}
+
 variable "region_details" {
   type = map(string)
   default = { 

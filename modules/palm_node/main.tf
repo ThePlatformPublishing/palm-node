@@ -101,7 +101,7 @@ resource "aws_eip" "besu_node_eips" {
   vpc = true
 }
 
-resource "aws_eip_association" "eip_bootnodes_associate" {
+resource "aws_eip_association" "eip_palmnodes_associate" {
   instance_id   = aws_instance.besu_nodes.id
   allocation_id = aws_eip.besu_node_eips.id
 }
