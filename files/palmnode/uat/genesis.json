@@ -12,7 +12,7 @@
     "muirglacierblock": 0,
     "berlinBlock": 0,
     "ibft2": {
-      "blockperiodseconds": 2,
+      "blockperiodseconds": 5,
       "epochlength": 30000,
       "blockreward": "787268396000000000",
       "miningbeneficiary": "0x8888888888888888888888888888888888888888",
@@ -21,7 +21,7 @@
   },
   "nonce": "0x0",
   "timestamp": "0x0",
-  "gasLimit": "0x47b760",
+  "gasLimit": "0xd72620",
   "difficulty": "0x1",
   "mixHash": "0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365",
   "coinbase": "0x8888888888888888888888888888888888888888",
