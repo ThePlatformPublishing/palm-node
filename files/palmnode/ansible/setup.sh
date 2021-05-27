@@ -3,7 +3,21 @@
 echo $@ > /tmp/args.txt
 
 BESU_HOST_IP=$1
+BESU_NODE_TYPE=$2
 sed -i "s/PARAM_BESU_HOST_IP/$BESU_HOST_IP/g" /home/ec2-user/besu/besu.yml
+
+# if its a validator; then make sure it uses local permissions so validators can only talk to trusted nodes
+# WARNING: Once your node starts up, you must also add your palm node's enode to `/etc/besu/permissions_config.toml` 
+# and notify the Palm.io admins of your enode so it can be allowed into the validator pool
+if [ "$BESU_NODE_TYPE" == "validator" ]; then
+    echo "Using permissions for validator node" >> /tmp/args.txt;
+    mkdir -p /etc/besu;
+    mv /home/ec2-user/besu/permissions_config.toml /etc/besu/permissions_config.toml
+else 
+    echo "No permissions for this node" >> /tmp/args.txt;
+    # remove the permissions line so your node can talk to any peer 
+    sed -ie '/besu_permissions_nodes_config_file.*/d' /home/ec2-user/besu/besu.yml
+fi
 
 cd /home/ec2-user/besu/
 python3 -m venv env

@@ -13,6 +13,7 @@
         besu_sync_mode: "FULL"
         besu_rpc_http_api: ["DEBUG","NET","WEB3","ETH","ADMIN","IBFT","TRACE"]
         besu_genesis_path: /etc/besu/genesis.json
+        besu_permissions_nodes_config_file: /etc/besu/permissions_config.toml
         besu_bootnodes: ["enode://6a21d1fe0e283412e65a3dd3f4cdc63879eec0a939c4a6dff7dba90cd368ce89dcd732909c2f64d26267f85a56c43627f11742ef88feb712595362e1590ed077@18.205.172.1:30303","enode://7992a25ead5579feb1573aca85d17e49c7cb84d4391a7ac59430eecb9e24bb76a57d749b886e47e19ea8cec7ffbda326d8778434f418edda4ca1950937b3df34@52.2.6.154:30303"]
         besu_host_ip: PARAM_BESU_HOST_IP
 

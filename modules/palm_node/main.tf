@@ -170,7 +170,7 @@ resource "aws_instance" "besu_nodes" {
       "sudo yum install -y ${var.amzn2_base_packages}",
       "sudo sh $HOME/provision_volume.sh ",
       "wget -o $HOME/besu/genesis.json https://genesis-files.palm.io/${var.palm_env}/genesis.json",
-      "sudo sh $HOME/besu/setup.sh '${aws_eip.besu_node_eips.public_ip}' ",
+      "sudo sh $HOME/besu/setup.sh '${aws_eip.besu_node_eips.public_ip}' '${var.palm_node_type}'",
       "sleep 30",
     ]
   }

@@ -33,20 +33,23 @@ module "monitoring" {
 # ###########################
 # # palm besu node
 # ###########################
-# module "palmnodes" {
-#   source = "./modules/palm_node"
-#   region_details = var.region_details
-#   vpc_details = var.vpc_details
-#   ingress_ips = {
-#     discovery_cidrs = ["0.0.0.0/0"]
-#     rpc_cidrs = var.rpc_whitelist_cidrs
-#   }
-#   node_details = {
-#     provisioning_path = "./files/palmnode"
-#     palm_env = var.env_type
-#     ami_id = data.aws_ami.ami_amzn2.id 
-#     instance_type = var.node_details.instance_type
-#     volume_size = var.node_details.instance_volume_size
-#   }
-#   tags = var.tags
-# }
+module "palmnodes" {
+  source = "./modules/palm_node"
+  region_details = var.region_details
+  vpc_details = var.vpc_details
+  ingress_ips = {
+    discovery_cidrs = ["0.0.0.0/0"]
+    rpc_cidrs = var.rpc_whitelist_cidrs
+  }
+  node_details = {
+    provisioning_path = "./files/palmnode"
+    ami_id = data.aws_ami.ami_amzn2.id 
+    instance_type = var.node_details.instance_type
+    volume_size = var.node_details.instance_volume_size
+    palm_env = var.env_type
+    palm_env = var.palm_node_type
+  }
+  tags = var.tags
+}
+
+

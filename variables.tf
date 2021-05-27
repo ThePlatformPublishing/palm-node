@@ -4,6 +4,11 @@ variable "env_type" {
   default = "dev"
 }
 
+ "reader" # reader or validator
+variable "palm_node_type" {
+  default = "reader"   
+}
+
 variable "create_monitoring_node" {
   description = "create a monitoring instance to monitor the health of the palm node"
   type        = bool
