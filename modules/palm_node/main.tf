@@ -159,11 +159,6 @@ resource "aws_instance" "besu_nodes" {
   }
 
   provisioner "file" {
-    source = "${var.node_details["provisioning_path"]}/${var.node_details["palm_env"]}/genesis.json"
-    destination = "$HOME/besu/genesis.json"
-  }
-
-  provisioner "file" {
     source = "${var.node_details["provisioning_path"]}/${var.node_details["palm_env"]}/ansible/besu.yml"
     destination = "$HOME/besu/besu.yml"
   }
@@ -174,6 +169,7 @@ resource "aws_instance" "besu_nodes" {
       "timeout 120 /bin/bash -c 'until stat /var/lib/cloud/instance/boot-finished 2>/dev/null; do echo waiting ...; sleep 5; done'",
       "sudo yum install -y ${var.amzn2_base_packages}",
       "sudo sh $HOME/provision_volume.sh ",
+      "wget -o $HOME/besu/genesis.json https://genesis-files.palm.io/${var.palm_env}/genesis.json",
       "sudo sh $HOME/besu/setup.sh '${aws_eip.besu_node_eips.public_ip}' ",
       "sleep 30",
     ]
