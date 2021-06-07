@@ -34,7 +34,7 @@ ansible-playbook -v besu.yml --extra-vars="besu_systemd_state=stopped"
 
 # copy config across
 cp genesis.json /etc/besu/genesis.json
-mv keys/ /etc/besu/
+#mv keys/ /etc/besu/
 chown -R besu:besu /etc/besu/
 chown -R besu:besu /opt/besu/
 chown -R besu:besu /data/

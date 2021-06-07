@@ -47,7 +47,7 @@ module "palmnodes" {
     instance_type = var.node_details.instance_type
     volume_size = var.node_details.instance_volume_size
     palm_env = var.env_type
-    palm_env = var.palm_node_type
+    palm_node_type = var.palm_node_type
   }
   tags = var.tags
 }

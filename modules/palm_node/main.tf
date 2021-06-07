@@ -169,8 +169,8 @@ resource "aws_instance" "besu_nodes" {
       "timeout 120 /bin/bash -c 'until stat /var/lib/cloud/instance/boot-finished 2>/dev/null; do echo waiting ...; sleep 5; done'",
       "sudo yum install -y ${var.amzn2_base_packages}",
       "sudo sh $HOME/provision_volume.sh ",
-      "wget -o $HOME/besu/genesis.json https://genesis-files.palm.io/${var.palm_env}/genesis.json",
-      "sudo sh $HOME/besu/setup.sh '${aws_eip.besu_node_eips.public_ip}' '${var.palm_node_type}'",
+      "wget -O $HOME/besu/genesis.json https://genesis-files.palm.io/${var.node_details["palm_env"]}/genesis.json",
+      "sudo sh $HOME/besu/setup.sh '${aws_eip.besu_node_eips.public_ip}' '${var.node_details["palm_node_type"]}'",
       "sleep 30",
     ]
   }

@@ -1,10 +1,10 @@
 
 # which of the palm networks to use
 variable "env_type" {
-  default = "dev"
+  default = "uat"
 }
 
- "reader" # reader or validator
+# reader or validator
 variable "palm_node_type" {
   default = "reader"   
 }
@@ -18,7 +18,7 @@ variable "create_monitoring_node" {
 variable "region_details" {
   type = map(string)
   default = { 
-    region = "us-east-1"
+    region = "ap-southeast-2"
     ssh_key = "palm"
     ssh_key_path = "~/.ssh/palm.pem"
   }
