@@ -6,7 +6,7 @@ In addition it also has ansible scripts that let you perfrom routine updates to 
 
 
 ### Pre requisites:
-- [Terraform](https://www.terraform.io/)
+- [Terraform](https://www.terraform.io/) v 0.15 or greater
 - [Ansible](https://www.ansible.com/)
 - OS (Ubuntu) packages:
 ```bash
