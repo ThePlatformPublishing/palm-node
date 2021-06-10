@@ -4,6 +4,10 @@ This repo contains terrafrom scripts to create either a Palm node/s that runs [H
 
 In addition it also has ansible scripts that let you perfrom routine updates to the Palm node once it is up and running.
 
+| ⚠️ **Note**: We use terraform to provision infrastructure (ie ec2 instances) and ansible to provision HLF Besu on the instances. When you deploy things via terraform, if you have any changes in the file and re run it with `terraform apply` it could destroy existing instances and bring new ones up. Please do not run `terraform apply` twice, instead use `terraform plan` to get a list of changes and then apply if required. To make updates to the instances once they are up, such as edits to the permissions_config.toml file or to update versions of Besu, please use ansible only. Refer to the section titled *Update versions of Besu on your palm node* |
+| ---
+|
+
 ### Glossary of terms:
 * Enode: A method to identify a node comprising a node's public key and ip of the form "enode://<public_key>@<ip>:30303" where 30303 is the default discovery port
 * Boot node: An ethereum node that starts the network off. This is essentially a node that is identical to a TX node but the enode's are known across the network. Every other node first connects to these nodes to obtain a list of peers (other nodes) and then the respective node will attempt to connect to each of those peers.

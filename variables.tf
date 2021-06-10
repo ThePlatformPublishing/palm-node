@@ -1,12 +1,7 @@
 
 # which of the palm networks to use
 variable "env_type" {
-  default = "uat"
-}
-
-# reader or validator
-variable "palm_node_type" {
-  default = "reader"   
+  default = "prd"
 }
 
 variable "create_monitoring_node" {
@@ -27,9 +22,9 @@ variable "region_details" {
 variable "vpc_details" {
   type = map(string)
   default = {
-    vpc_id = "vpc-123"
+    vpc_id = "vpc-012"
     vpc_cidr = "0.0.0.0/16"
-    public_subnet = "subnet-123"
+    public_subnet = "subnet-012"
   }
 }
 
