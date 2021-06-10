@@ -9,6 +9,6 @@
   "author": "Joshua Fernandes",
   "license": "MIT",
   "dependencies": {
-    "keccak": "^3.0.1"
+    "ethereumjs-util": "^7.0.10"
   }
 }
