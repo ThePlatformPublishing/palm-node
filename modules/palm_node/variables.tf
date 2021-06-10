@@ -35,7 +35,7 @@ variable "node_details" {
     instance_type = "m5.large"
     volume_size = "500"
     palm_env = "null"
-    palm_node_type = "reader" # reader or validator
+    palm_node_type = "tx" # tx or validator
   }
 }
 

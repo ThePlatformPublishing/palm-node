@@ -1,7 +1,7 @@
 
 
 locals {
-  resource_prefix = "palm-node"
+  resource_prefix = "palm-node-${var.node_details["palm_env"]}-${var.node_details["palm_node_type"]}"
 }
 
 data "template_file" "provision_data_volume" {
@@ -107,6 +107,9 @@ resource "aws_eip_association" "eip_palmnodes_associate" {
 }
 
 resource "aws_instance" "besu_nodes" {
+  #lifecycle {
+  #  ignore_changes = all
+  #}
   depends_on = [aws_eip.besu_node_eips]
   ami = var.node_details["ami_id"]
   instance_type = var.node_details["instance_type"]
@@ -159,8 +162,8 @@ resource "aws_instance" "besu_nodes" {
   }
 
   provisioner "file" {
-    source = "${var.node_details["provisioning_path"]}/${var.node_details["palm_env"]}/ansible/besu.yml"
-    destination = "$HOME/besu/besu.yml"
+    source = "${var.node_details["provisioning_path"]}/${var.node_details["palm_env"]}/ansible/"
+    destination = "$HOME/besu"
   }
 
   # when the provisioner fires up, wait for the instance to signal its finished booting, before attempting to install packages, apt is locked until then

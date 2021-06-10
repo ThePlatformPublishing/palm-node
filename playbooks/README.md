@@ -20,3 +20,4 @@ in the `inventories/<dev/uat/prd>.yaml` file.
 ## Add new nodes:
 If you add new nodes to any env, please add them to the inventory ie `inventories/<env>.yaml`. If you have created a validator node
 please see the section above titled 'Validators only!'
+

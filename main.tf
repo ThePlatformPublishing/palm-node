@@ -31,9 +31,9 @@ module "monitoring" {
 
 
 # ###########################
-# # palm besu node
+# palm besu node - tx
 # ###########################
-module "palmnodes" {
+module "palmnodes-tx" {
   source = "./modules/palm_node"
   region_details = var.region_details
   vpc_details = var.vpc_details
@@ -47,9 +47,33 @@ module "palmnodes" {
     instance_type = var.node_details.instance_type
     volume_size = var.node_details.instance_volume_size
     palm_env = var.env_type
-    palm_node_type = var.palm_node_type
+    palm_node_type = "tx"
   }
   tags = var.tags
 }
+
+
+# ###########################
+# palm besu node - validator
+# ###########################
+module "palmnodes-validator" {
+  source = "./modules/palm_node"
+  region_details = var.region_details
+  vpc_details = var.vpc_details
+  ingress_ips = {
+    discovery_cidrs = ["0.0.0.0/0"]
+    rpc_cidrs = var.rpc_whitelist_cidrs
+  }
+  node_details = {
+    provisioning_path = "./files/palmnode"
+    ami_id = data.aws_ami.ami_amzn2.id 
+    instance_type = var.node_details.instance_type
+    volume_size = var.node_details.instance_volume_size
+    palm_env = var.env_type
+    palm_node_type = "validator"
+  }
+  tags = var.tags
+}
+
 
 

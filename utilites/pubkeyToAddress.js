@@ -5,7 +5,7 @@ Description: Get an address for a public key to use when adding/removing validat
 Usage:
 
 npm install
-node pubkeyToAddress.js "0xabcd..............................."
+node pubkeyToAddress.js "abcd..............................."
 
 */
 
