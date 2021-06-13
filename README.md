@@ -19,6 +19,8 @@ In addition it also has ansible scripts that let you perfrom routine updates to 
 Members joining the Palm network will normally create a normal 'Transaction node'. Some members will create a 'Validator node' - please note that when you opt to create a Validator node, the scripts in this repo will also create an Transaction node for you. When the network goes live there will be an initial pool of 5 validators. Any further validators have to be added/removed in via [voting](https://besu.hyperledger.org/en/latest/Tutorials/Private-Network/Adding-removing-IBFT-validators/). Please refer to the section on 'Process to add or remove Validators' below for more details.
 
 
+![Image network](images/palm-network.png)
+
 ### Testing:
 Members are encouraged to test things on the Palm Dev and UAT test networks, and can do so by connecting to the Infura addresses. Members can optionally spin up a Transaction node to connect to the test network but are not required to do so - if you wish to create one, please set the `env_type` var to `uat` or `dev` and follow the steps below to create a Transaction node.
 
