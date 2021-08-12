@@ -1,6 +1,9 @@
+
+![Image logo](images/consensys-logo.png)
+
 # Palm-node
 
-This repo contains terrafrom scripts to create either a Palm node/s that runs [Hyperledger Besu](https://consensys.net/quorum/developers/) on AWS. 
+This repo has been provided by consenSys AG and has terrafrom scripts to create either a Palm node/s that runs [Hyperledger Besu](https://consensys.net/quorum/developers/) on AWS. Documentation for the Palm network itself can be found at https://docs.palm.io/
 
 In addition it also has ansible scripts that let you perfrom routine updates to the Palm node once it is up and running.
 
@@ -10,8 +13,8 @@ In addition it also has ansible scripts that let you perfrom routine updates to 
 ### Glossary of terms:
 * Enode: A method to identify a node comprising a node's public key and ip of the form "enode://<public_key>@<ip>:30303" where 30303 is the default discovery port
 * Boot node: An ethereum node that starts the network off. This is essentially a node that is identical to a TX node but the enode's are known across the network. Every other node first connects to these nodes to obtain a list of peers (other nodes) and then the respective node will attempt to connect to each of those peers.
-* Validator node: A ethereum node participating in a POA network that is repsonsible for proposing blocks and need to be available always.
-* TX node: A ethereum node that accepts transactions. This is also sometimes refered to as a 'Reader node', 'Writer node', 'Observer node'
+* Validator node: An ethereum node participating in a POA network that is repsonsible for proposing blocks and need to be available always.
+* TX node: An ethereum node that accepts transactions. This is also sometimes refered to as a 'Reader node', 'Writer node', 'Observer node'
 
 
 ### Architecture:
@@ -83,7 +86,7 @@ Update the [inventory](./playbooks/inventories) and add the IP of the palm node 
 ### Process for Adding/Removing Validators:
 In this scenario lets say MemberA is adding a validator to the existing pool, so the steps are:
 1. MemberA creates a Validator node and a Transaction node as outlined above.
-2. MemberA then gets the enode of their validator as well as the address and sends it to `daniel.heyman@palm.io` via email requesting their enode be added. To obtain the address from the enode, please use the [pubKeyToAddress](./utilites/pubkeyToAddress.js) script.
+2. MemberA then gets the enode of their validator as well as the address and fills out the form on https://docs.palm.io/Concepts/Validators/. Click on 'Contact Us'. To obtain the address from the enode, please use the [pubKeyToAddress](./utilites/pubkeyToAddress.js) script.
 3. Every existing member of the validator pool must then:
 - make an API call proposing that proposes MemberA's node's address be added as a validator like so:
 
