@@ -1,9 +1,7 @@
 
-![Image logo](images/consensys-logo.png)
-
 # Palm-node
 
-This repo has been provided by consenSys AG and has terrafrom scripts to create either a Palm node/s that runs [Hyperledger Besu](https://consensys.net/quorum/developers/) on AWS. Documentation for the Palm network itself can be found at https://docs.palm.io/
+This repo has been provided by ConsenSys Software Inc and has terrafrom scripts to create either a Palm node/s that runs [Hyperledger Besu](https://consensys.net/quorum/developers/) on AWS. Documentation for the Palm network itself can be found at https://docs.palm.io/
 
 In addition it also has ansible scripts that let you perfrom routine updates to the Palm node once it is up and running.
 
@@ -103,5 +101,8 @@ To remove a node from the pool, the same process from above is followed, with th
 curl -X POST --data '{"jsonrpc":"2.0","method":"ibft_proposeValidatorVote","params":["<ADDRESS_OF_MEMBERA>", false], "id":1}' http://127.0.0.1:8545
 ```
 
-
+### Credits
+The code in this repository was developed by ConsenSys Software Inc.
+  
+![Image logo](images/consensys-logo.png)
 
