@@ -30,12 +30,13 @@ variable "ingress_ips" {
 variable "node_details" {
   type = map(string)
   default = {
-    provisioning_path = "files/besu"
+    provisioning_path = "./files/besu"
     ami_id = ""
     instance_type = "m5.large"
     volume_size = "500"
     palm_env = "null"
     palm_node_type = "tx" # tx or validator
+    palm_node_count = 1
   }
 }
 
@@ -51,7 +52,7 @@ variable "tags" {
 # make sure the besu_version and download_url match in the number
 # eg: 1.3.8 for version is used for anything that contains 1.3.8-rc.. or 1.3.8-snapshot.. etc
 variable "besu_version" {
-  default = "21.1.4"
+  default = "21.10.9"
 }
 
 variable "amzn2_base_packages" {

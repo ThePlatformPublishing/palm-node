@@ -99,17 +99,19 @@ resource "aws_security_group" "besu_rpc_sg" {
 
 resource "aws_eip" "besu_node_eips" {
   vpc = true
+  count = var.node_details["palm_node_count"]
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "aws_eip_association" "eip_palmnodes_associate" {
-  instance_id   = aws_instance.besu_nodes.id
-  allocation_id = aws_eip.besu_node_eips.id
+  instance_id   = aws_instance.besu_nodes[count.index].id
+  allocation_id = aws_eip.besu_node_eips[count.index].id
+  count   = var.node_details["palm_node_count"]
 }
 
 resource "aws_instance" "besu_nodes" {
-  #lifecycle {
-  #  ignore_changes = all
-  #}
   depends_on = [aws_eip.besu_node_eips]
   ami = var.node_details["ami_id"]
   instance_type = var.node_details["instance_type"]
@@ -128,16 +130,16 @@ resource "aws_instance" "besu_nodes" {
     volume_type = "gp2"
     delete_on_termination = false
     tags = {
-      Name = "${local.resource_prefix}-data"
+      Name = "${local.resource_prefix}-${count.index}-data"
       vpc = var.vpc_details["vpc_id"]
       projectName  = var.tags["project_name"]
       projectGroup = var.tags["project_group"]
       team         = var.tags["team"]
     }
   }
-
+  count = var.node_details["palm_node_count"]
   tags = {
-    Name = "${local.resource_prefix}"
+    Name = "${local.resource_prefix}-${count.index}"
     vpc = var.vpc_details["vpc_id"]
     projectName  = var.tags["project_name"]
     projectGroup = var.tags["project_group"]
@@ -153,17 +155,17 @@ resource "aws_instance" "besu_nodes" {
 
   provisioner "file" {
     content = "${data.template_file.provision_data_volume.rendered}"
-    destination = "$HOME/provision_volume.sh"
+    destination = "/home/ec2-user/provision_volume.sh"
   }
 
   provisioner "file" {
     source = "${var.node_details["provisioning_path"]}/ansible"
-    destination = "$HOME/besu"
+    destination = "/home/ec2-user/besu"
   }
 
   provisioner "file" {
     source = "${var.node_details["provisioning_path"]}/${var.node_details["palm_env"]}/ansible/"
-    destination = "$HOME/besu"
+    destination = "/home/ec2-user/besu"
   }
 
   # when the provisioner fires up, wait for the instance to signal its finished booting, before attempting to install packages, apt is locked until then
@@ -173,9 +175,13 @@ resource "aws_instance" "besu_nodes" {
       "sudo yum install -y ${var.amzn2_base_packages}",
       "sudo sh $HOME/provision_volume.sh ",
       "wget -O $HOME/besu/genesis.json https://genesis-files.palm.io/${var.node_details["palm_env"]}/genesis.json",
-      "sudo sh $HOME/besu/setup.sh '${aws_eip.besu_node_eips.public_ip}' '${var.node_details["palm_node_type"]}'",
+      "sudo sh $HOME/besu/setup.sh '${aws_eip.besu_node_eips[count.index].public_ip}' '${var.node_details["palm_node_type"]}'",
       "sleep 30",
     ]
+  }
+  
+  lifecycle {
+    ignore_changes = all
   }
 }
 

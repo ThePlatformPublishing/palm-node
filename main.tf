@@ -48,6 +48,7 @@ module "palmnodes-tx" {
     volume_size = var.node_details.instance_volume_size
     palm_env = var.env_type
     palm_node_type = "tx"
+    palm_node_count = var.tx_node_count
   }
   tags = var.tags
 }
@@ -71,6 +72,7 @@ module "palmnodes-validator" {
     volume_size = var.node_details.instance_volume_size
     palm_env = var.env_type
     palm_node_type = "validator"
+    palm_node_count = var.validator_node_count
   }
   tags = var.tags
 }

@@ -1,7 +1,9 @@
 ---
 - name: consensys.hyperledger_besu
-  version: 0.3.2
+  version: 0.3.5
 - name: undergreen.prometheus-node-exporter
+  version: v1.4.0
 - name: undergreen.prometheus-exporters-common
+  version: v1.2.0
 - name: cloudalchemy.node_exporter
-
+  version: 2.0.0

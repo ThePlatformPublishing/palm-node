@@ -96,7 +96,7 @@ resource "aws_instance" "monitoring" {
 
   provisioner "file" {
     source = "${var.node_details["provisioning_path"]}"
-    destination = "$HOME/monitoring"
+    destination = "/home/ec2-user/monitoring"
   }
 
 
