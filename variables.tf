@@ -57,7 +57,7 @@ variable "amzn2_base_packages" {
 
 
 variable "validator_node_count" {
-  default = "2"
+  default = "1"
 }
 
 variable "tx_node_count" {
