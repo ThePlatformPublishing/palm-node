@@ -12,8 +12,11 @@ in the `inventories/<dev/uat/prd>.yaml` file.
 ## Update existing nodes with:
 
 1. Update the path of the ssh pem key in the update_nodes.sh line 24 and then run
+NOTE: the version below is not a recommendation of any sort and is just the current version as of writing this comment.
+Please use the most up to date release of Besu which can be found on https://github.com/hyperledger/besu/releases
+
 ```
-./update_nodes.sh <dev/uat/prd> 21.1.7
+./update_nodes.sh <dev/uat/prd> 22.1.3
 ```
 
 
