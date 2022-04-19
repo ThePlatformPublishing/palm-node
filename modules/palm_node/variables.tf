@@ -27,6 +27,7 @@ variable "ingress_ips" {
   }
 }
 
+
 variable "node_details" {
   type = map(string)
   default = {
@@ -49,13 +50,24 @@ variable "tags" {
   }
 }
 
-# make sure the besu_version and download_url match in the number
-# eg: 1.3.8 for version is used for anything that contains 1.3.8-rc.. or 1.3.8-snapshot.. etc
-variable "besu_version" {
-  default = "21.10.9"
-}
-
 variable "amzn2_base_packages" {
-  default = "wget curl ntp bind-utils iproute vim-enhanced git libselinux-python python python-pip python-setuptools python-virtualenv python3-pip python3 python3-setuptools jq sysstat awslogs make automake gcc gcc-c++ jq nvme-cli kernel-devel java-11-amazon-corretto.x86_64"
+  default = "wget curl ntp bind-utils iproute vim-enhanced git libselinux-python jq sysstat awslogs make automake gcc gcc-c++ jq nvme-cli kernel-devel java-11-amazon-corretto.x86_64"
 }
 
+# WARNING:
+# amzn2 comes with python2.7 which is deprecated and installs for python3.8+ are via amzn extras only (as at time of writing this).
+# Symlinks are not created automatically so you need to do them here
+# 
+# 3.8 is not a recommended version and is just the current version as at writing this, please use the most recent version
+# that amzn2 provides. Also submit a PR to update the piece below.
+#
+variable "python_version" {
+  default = "3.8"
+}
+
+# NOTE: the version below is not a recommendation of any sort and is just the current version as of writing this comment
+# Please use the most up to date release of Besu which can be found on https://github.com/hyperledger/besu/releases
+#
+variable "besu_version" {
+  default = "22.1.3"
+}

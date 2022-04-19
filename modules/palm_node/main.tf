@@ -124,10 +124,11 @@ resource "aws_instance" "besu_nodes" {
   root_block_device {
     volume_size = 100
   }
+  # gp3 is current as at writing this, please update to any newer versions or variations of storage to suit your requirements
   ebs_block_device {
     device_name = "/dev/sdf"
     volume_size = var.node_details["volume_size"]
-    volume_type = "gp2"
+    volume_type = "gp3"
     delete_on_termination = false
     tags = {
       Name = "${local.resource_prefix}-${count.index}-data"
@@ -168,11 +169,21 @@ resource "aws_instance" "besu_nodes" {
     destination = "/home/ec2-user/besu"
   }
 
-  # when the provisioner fires up, wait for the instance to signal its finished booting, before attempting to install packages, apt is locked until then
+  # WARNING:
+  # amzn2 comes with python2.7 which is deprecated and installs for python3.8+ are via amzn extras only (as at time of writing this).
+  # Symlinks are not created automatically so you need to do them here
+  # 
+  # 3.8 is not a recommended version and is just the current version as at writing this, please use the most recent version
+  # that amzn2 provides. Also submit a PR to update the piece below.
+  #
+  # when the provisioner fires up, wait for the instance to signal its finished booting, before attempting to install packages
   provisioner "remote-exec" {
     inline = [
       "timeout 120 /bin/bash -c 'until stat /var/lib/cloud/instance/boot-finished 2>/dev/null; do echo waiting ...; sleep 5; done'",
       "sudo yum install -y ${var.amzn2_base_packages}",
+      "sudo amazon-linux-extras install -y python${var.python_version}",
+      "sudo ln --force --symbolic /usr/bin/python${var.python_version} /usr/bin/python3",
+      "sudo ln --force --symbolic /usr/bin/pip${var.python_version} /usr/bin/pip3",
       "sudo sh $HOME/provision_volume.sh ",
       "wget -O $HOME/besu/genesis.json https://genesis-files.palm.io/${var.node_details["palm_env"]}/genesis.json",
       "sudo sh $HOME/besu/setup.sh '${aws_eip.besu_node_eips[count.index].public_ip}' '${var.node_details["palm_node_type"]}'",

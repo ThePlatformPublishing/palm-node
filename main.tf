@@ -12,7 +12,6 @@ data "aws_ami" "ami_amzn2" {
   }
 }
 
-
 ###########################
 # monitoring
 ###########################
@@ -50,6 +49,8 @@ module "palmnodes-tx" {
     palm_node_type = "tx"
     palm_node_count = var.tx_node_count
   }
+  besu_version = var.besu_version
+  python_version = var.python_version
   tags = var.tags
 }
 
@@ -74,6 +75,8 @@ module "palmnodes-validator" {
     palm_node_type = "validator"
     palm_node_count = var.validator_node_count
   }
+  besu_version = var.besu_version
+  python_version = var.python_version
   tags = var.tags
 }
 
