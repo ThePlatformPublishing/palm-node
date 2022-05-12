@@ -16,7 +16,7 @@ NOTE: the version below is not a recommendation of any sort and is just the curr
 Please use the most up to date release of Besu which can be found on https://github.com/hyperledger/besu/releases
 
 ```
-./update_nodes.sh <dev/uat/prd> 22.1.3
+./update_nodes.sh <dev/uat/prd> 22.4.0
 ```
 
 

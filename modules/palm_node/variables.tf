@@ -69,5 +69,5 @@ variable "python_version" {
 # Please use the most up to date release of Besu which can be found on https://github.com/hyperledger/besu/releases
 #
 variable "besu_version" {
-  default = "22.1.3"
+  default = "22.4.0"
 }
