@@ -4,3 +4,4 @@
 .lh/*
 .idea/*
 *.tfstate*
+variables.tf
