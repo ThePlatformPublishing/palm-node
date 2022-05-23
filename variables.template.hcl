@@ -1,3 +1,13 @@
+# # # # # # # # # # # # # # #
+#     A T T E N T I O N     #
+# # # # # # # # # # # # # # #
+
+# The file variables.tf contains sensible data like
+# ssh keys paths, vpc and region information. Hence
+# the existence for this template file.
+# Change whatever you like here (or follow readmes) and
+# rename it to variables.tf
+
 
 # which of the palm networks to use
 variable "env_type" {
